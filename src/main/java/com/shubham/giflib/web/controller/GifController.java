@@ -57,8 +57,8 @@ public class GifController {
         // TODO: Get list of all GIFs marked as favorite
         List<Gif> faves = new ArrayList<>();
 
-        model.addAttribute("gifs",faves);
-        model.addAttribute("username","Chris Ramacciotti"); // Static username
+        model.addAttribute("gifs", faves);
+        model.addAttribute("username", "Shubham Aggarwal"); // Static username
         return "gif/favorites";
     }
 
@@ -66,26 +66,26 @@ public class GifController {
     @RequestMapping(value = "/gifs", method = RequestMethod.POST)
     public String addGif(Gif gif, @RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
         // TODO: Upload new GIF if data is valid
-        gifService.save(gif,file);
+        gifService.save(gif, file);
 
         // Add flash message for success
-        redirectAttributes.addFlashAttribute("flash",new FlashMessage("GIF successfully uploaded!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("GIF successfully uploaded!", FlashMessage.Status.SUCCESS));
 
         // TODO: Redirect browser to new GIF's detail view
-        return String.format("redirect:/gifs/%s",gif.getId());
+        return String.format("redirect:/gifs/%s", gif.getId());
     }
 
     // Form for uploading a new GIF
     @RequestMapping("/upload")
     public String formNewGif(Model model) {
         // TODO: Add model attributes needed for new GIF upload form
-        if(!model.containsAttribute("gif")) {
-            model.addAttribute("gif",new Gif());
+        if (!model.containsAttribute("gif")) {
+            model.addAttribute("gif", new Gif());
         }
-        model.addAttribute("categories",categoryService.findAll());
-        model.addAttribute("action","/gifs");
-        model.addAttribute("heading","Upload");
-        model.addAttribute("submit","Add");
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("action", "/gifs");
+        model.addAttribute("heading", "Upload");
+        model.addAttribute("submit", "Add");
 
         return "gif/form";
     }
@@ -94,13 +94,13 @@ public class GifController {
     @RequestMapping(value = "/gifs/{gifId}/edit")
     public String formEditGif(@PathVariable Long gifId, Model model) {
         // TODO: Add model attributes needed for edit form
-        if(!model.containsAttribute("gif")) {
-            model.addAttribute("gif",gifService.findById(gifId));
+        if (!model.containsAttribute("gif")) {
+            model.addAttribute("gif", gifService.findById(gifId));
         }
-        model.addAttribute("categories",categoryService.findAll());
-        model.addAttribute("action",String.format("/gifs/%s",gifId));
-        model.addAttribute("heading","Edit GIF");
-        model.addAttribute("submit","Update");
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("action", String.format("/gifs/%s", gifId));
+        model.addAttribute("heading", "Edit GIF");
+        model.addAttribute("submit", "Update");
 
         return "gif/form";
     }
@@ -109,13 +109,13 @@ public class GifController {
     @RequestMapping(value = "/gifs/{gifId}", method = RequestMethod.POST)
     public String updateGif(Gif gif, @RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
         // TODO: Update GIF if data is valid
-        gifService.save(gif,file);
+        gifService.save(gif, file);
 
         // Flash message
-        redirectAttributes.addFlashAttribute("flash",new FlashMessage("GIF successfully updated!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("GIF successfully updated!", FlashMessage.Status.SUCCESS));
 
         // Redirect browser to updated GIF's detail view
-        return String.format("redirect:/gifs/%s",gif.getId());
+        return String.format("redirect:/gifs/%s", gif.getId());
     }
 
     // Delete an existing GIF
@@ -124,7 +124,7 @@ public class GifController {
         // TODO: Delete the GIF whose id is gifId
         Gif gif = gifService.findById(gifId);
         gifService.delete(gif);
-        redirectAttributes.addFlashAttribute("flash",new FlashMessage("GIF deleted!", FlashMessage.Status.SUCCESS));
+        redirectAttributes.addFlashAttribute("flash", new FlashMessage("GIF deleted!", FlashMessage.Status.SUCCESS));
 
         // TODO: Redirect to app root
         return "redirect:/";
@@ -138,7 +138,7 @@ public class GifController {
         gifService.toggleFavorite(gif);
 
         // TODO: Redirect to GIF's detail view
-        return String.format("redirect:%s",request.getHeader("referer"));
+        return String.format("redirect:%s", request.getHeader("referer"));
     }
 
     // Search results
@@ -147,7 +147,7 @@ public class GifController {
         // TODO: Get list of GIFs whose description contains value specified by q
         List<Gif> gifs = new ArrayList<>();
 
-        model.addAttribute("gifs",gifs);
+        model.addAttribute("gifs", gifs);
         return "gif/index";
     }
 }
