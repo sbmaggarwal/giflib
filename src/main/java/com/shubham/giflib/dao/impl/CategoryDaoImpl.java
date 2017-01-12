@@ -1,5 +1,6 @@
-package com.shubham.giflib.dao;
+package com.shubham.giflib.dao.impl;
 
+import com.shubham.giflib.dao.CategoryDao;
 import com.shubham.giflib.model.Category;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;

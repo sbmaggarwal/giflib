@@ -1,7 +1,8 @@
-package com.shubham.giflib.service;
+package com.shubham.giflib.service.impl;
 
 import com.shubham.giflib.dao.GifDao;
 import com.shubham.giflib.model.Gif;
+import com.shubham.giflib.service.GifService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
